@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width">
+        <title>Keyboard</title>
+        <link href="style.css" rel="stylesheet" type="text/css" />
+    </head>
+    <body>
+        <div id="content"></div>
+        <div id="sideBar">
+            Background Color:
+            <select id="colorSelect" onclick="changeColor(this)">
+                <option value="white">white</option>
+                <option value="#0f9225">green</option>
+                <option value="#391db3">blue</option>
+                <option value="#ad0e0e">red</option>
+            </select><br>
+            Key Color:
+            <select id="colorSelect" onclick="changeKeyColor(this)">
+                <option value="#dadada">grey</option>
+                <option value="#0f9225">green</option>
+                <option value="#391db3">blue</option>
+                <option value="#ad0e0e">red</option>
+            </select>
+        </div>
+        <script src="script.js"></script>
+    </body>
+</html>
