@@ -16,22 +16,30 @@
         <button id="shard" class="start" value="hard">Hard</button><br>
         <button id="sall" class="start" value="all">All</button>
     </div>
+    <div id="loading" style="display: none;">
+        <b>LOADING...</b>
+    </div>
     <div id="game" style="display: none;">
         <div id="feedback"></div>
+        <div id="score">Score: <span id="scoreVal">0</span></div>
         <div id="total">Correct: <span id="corr">0</span>/<span id="qtotal">0</span></div>
-        <div id="streak">Streak: <span id="streakval">0</span></div>
+        <div id="streak">Streak: <span id="streakval">0</span></div><br>
         <div>Category: <span id="category"></span></div>
-        <div id="diffWrap">Difficulty: <span id="diff"></span></div>
-        <div id="quest"></div>
-        <form id="selectionForm">
+        <div id="diffWrap">Difficulty: <span id="diff"></span></div><br>
+        <div id="quest"></div><br>
+        <form id="selectionForm" class="noselect">
             <input name="diff" type="radio" id="a" value="a">
-            <label id="la" for="a">null</label><br>
+                <label id="la" for="a">null</label><br>
+            </input>
             <input name="diff" type="radio" id="b" value="b">
-            <label id="lb" for="b">null</label><br>
+                <label id="lb" for="b">null</label><br>
+            </input>
             <input name="diff" type="radio" id="c" value="c">
-            <label id="lc" for="c">null</label><br>
-            <input name="diff" type="radio" id="c" value="d">
-            <label id="ld" for="d">null</label>
+                <label id="lc" for="c">null</label><br>
+            </input>
+            <input name="diff" type="radio" id="d" value="d">
+                <label id="ld" for="d">null</label><br>
+            </input>
         </form><br>
         <button id="send">submit</button>
     </div>

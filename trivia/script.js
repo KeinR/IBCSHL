@@ -6,10 +6,46 @@ let questions = {
 };
 let totalQuestions = 0;
 let correctQuestions = 0;
+let score = 0;
 let streak = 0;
 let correctIndex = 0;
 let difficulty = "all";
 const BUFFER_SIZE = 10;
+
+const SCENE = {
+    HOME: 0,
+    LOADING: 1,
+    GAME: 2,
+};
+const SCORE = {
+    EASY: 1,
+    MEDIUM: 2,
+    HARD: 4
+};
+
+function setScene(scn) {
+    let menu = $("#menu");
+    let loading = $("#loading");
+    let game = $("#game");
+    menu.css("display", "none");
+    loading.css("display", "none");
+    game.css("display", "none");
+    let target = null;
+    switch (scn) {
+        case SCENE.HOME:
+            target = menu;
+            break;
+        case SCENE.LOADING:
+            target = loading;
+            break;
+        case SCENE.GAME:
+            target = game;
+            break;
+    }
+    if (target != null) {
+        target.css("display", "block");
+    }
+}
 
 $(document).ready(() => {
     $(".start").on("click", function() {
@@ -22,6 +58,7 @@ $(document).ready(() => {
 });
 
 function loadQuestions() {
+    setScene(SCENE.LOADING);
     questions.data = undefined;
     questions.index = 0;
     let url = "https://opentdb.com/api.php?";
@@ -41,6 +78,7 @@ function loadQuestions() {
 function process(data) {
     console.log("Return: " + data.response_code);
     questions.data = data.results;
+    setScene(SCENE.GAME);
     next();
 }
 
@@ -54,6 +92,14 @@ function runQuestion() {
         streak++;
         fback.html("Correct!");
         fback.css("color", "green");
+        if (questions.active.difficulty == "easy") {
+            score += SCORE.EASY;
+        } else if (questions.active.difficulty == "medium") {
+            score += SCORE.MEDIUM;
+        } else {
+            // If "hard"
+            score += SCORE.HARD;
+        }
     } else {
         streak = 0;
         fback.html(`Incorrect... was "${questions.active.correct_answer}"`);
@@ -64,31 +110,38 @@ function runQuestion() {
 }
 
 function updateUI() {
-    $("#menu").css("display", "none");
-    $("#game").css("display", "block");
+    setScene(SCENE.GAME);
 
+    $("#scoreVal").html(score);
     $("#total #corr").html(correctQuestions);
     $("#total #qtotal").html(totalQuestions);
     $("#streak #streakval").html(streak);
 
     if (questions.active != undefined) {
-        if (difficulty == "all") {
-            $("#diffWrap").css("display", "block");
-            $("#diff").html(questions.active.difficulty);
+        let diff = $("#diff");
+        diff.html(questions.active.difficulty);
+        let diffColor = "pink";
+        if (questions.active.difficulty == "easy") {
+            diffColor = "#03a329";
+        } else if (questions.active.difficulty == "medium") {
+            diffColor = "#d1ae00";
         } else {
-            $("#diffWrap").css("display", "none");
+            // If equal to "hard"
+            diffColor = "#b30600";
         }
+        diff.css("color", diffColor);
+
         $("#category").html(questions.active.category);
         $("#quest").html(questions.active.question);
 
-        let a = $("#selectionForm label#la");
-        let b = $("#selectionForm label#lb");
-        let c = $("#selectionForm label#lc");
-        let d = $("#selectionForm label#ld");
-        let ia = $("#selectionForm input#a");
-        let ib = $("#selectionForm input#b");
-        let ic = $("#selectionForm input#c");
-        let id = $("#selectionForm input#d");
+        let a = $("#selectionForm #la");
+        let b = $("#selectionForm #lb");
+        let c = $("#selectionForm #lc");
+        let d = $("#selectionForm #ld");
+        let ia = $("#selectionForm #a");
+        let ib = $("#selectionForm #b");
+        let ic = $("#selectionForm #c");
+        let id = $("#selectionForm #d");
 
         let slots = [
             {a: a, b: ia},
