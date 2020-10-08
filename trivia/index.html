@@ -11,10 +11,12 @@
     <div id="menu">
         <h1>Trivia</h1>
 
-        <button id="seasy" class="start" value="easy">Easy</button><br>
-        <button id="smedium" class="start" value="medium">Medium</button><br>
-        <button id="shard" class="start" value="hard">Hard</button><br>
-        <button id="sall" class="start" value="all">All</button>
+        <span class="noselect">
+            <button id="seasy" class="start" value="easy">Easy</button><br>
+            <button id="smedium" class="start" value="medium">Medium</button><br>
+            <button id="shard" class="start" value="hard">Hard</button><br>
+            <button id="sall" class="start" value="all">All</button>
+        </span>
     </div>
     <div id="loading" style="display: none;">
         <b>LOADING...</b>
@@ -41,7 +43,7 @@
                 <label id="ld" for="d">null</label><br>
             </input>
         </form><br>
-        <button id="send">submit</button>
+        <button id="send" class="noselect">submit</button>
     </div>
 </body>
 </html>

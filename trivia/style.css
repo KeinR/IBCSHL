@@ -31,3 +31,7 @@ body {
 #category {
     font-style: italic;
 }
+
+button:hover {
+    cursor: pointer;
+}
