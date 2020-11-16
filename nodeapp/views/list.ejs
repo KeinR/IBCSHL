@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <title>repl.it express</title>
+    <link href="style.css" rel="stylesheet" type="text/css" />
+  </head>
+  <body>
+
+    <% for (let i = 0; i < students.length; i++) { %>
+    -------------------- <br>
+    ID = <%= students[i].id %> <br>
+    name = <%= students[i].name %> <br>
+    spirit animal = <%= students[i].spiritAnimal %> <br>
+    <% } %>
+    <!-- iterate over your student array and output name and animal.  remember: logic is <%  %> and fields are <%= %>-->
+
+    <script src="script.js"></script>
+  </body>
+</html>
