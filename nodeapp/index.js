@@ -12,12 +12,12 @@ app.use(express.static("public"))
 app.set('view engine', ejs)
 
 //our little fake db we will use for now
-var students = [
+let students = [
   {id:1, name:"Humble Galka", spiritAnimal:"shark"},
   {id:2, name:"Lassi Sevanto", spiritAnimal:"owl"},
   {id:3, name:"Anna Tripier", spiritAnimal:"bear"},
-  {id:4, name:"Orion Musselman", spiritAnimal:"tiger"},
-]
+  {id:4, name:"Orion Musselman", spiritAnimal:"tiger"}
+];
 
 // 1
 //write a route that handles a "get" at the 
@@ -38,6 +38,21 @@ app.get('/list', (req,res) => {
 
 app.get('/', (req,res) => {
     res.render('index.ejs', {greeting: 'Hello world!'});
+});
+
+app.get('/add', (req,res) => {
+  res.render('add.ejs');
+});
+
+app.post('/save', (req,res) => {
+  console.log(req.body.name);
+  console.log(req.body.animal);
+  students.push({
+    id: students.length + 1,
+    name: req.body.name,
+    spiritAnimal: req.body.animal
+  });
+  res.render('list.ejs', {students: students});
 });
 
 app.listen(3000, () => {
