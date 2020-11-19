@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width">
-    <title>repl.it express</title>
+    <title>List me the things</title>
     <link href="style.css" rel="stylesheet" type="text/css" />
   </head>
   <body>
@@ -14,6 +14,7 @@
     ID = <%= students[i].id %> <br>
     name = <%= students[i].name %> <br>
     spirit animal = <%= students[i].spiritAnimal %> <br>
+    <a href="/detail/<%= students[i].id %>">Would you like to know more?</a> <br>
     <% } %>
     <!-- iterate over your student array and output name and animal.  remember: logic is <%  %> and fields are <%= %>-->
 

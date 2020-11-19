@@ -55,6 +55,10 @@ app.post('/save', (req,res) => {
   res.render('list.ejs', {students: students});
 });
 
+app.get('/detail/:id', (req,res) => {
+  res.render('detail.ejs', {student: students[req.params.id - 1]});
+});
+
 app.listen(3000, () => {
   console.log('Server listening on port 3000...');
 });
