@@ -44,14 +44,29 @@ app.get('/add', (req,res) => {
   res.render('add.ejs');
 });
 
+app.get('/update', (req,res) => {
+  res.render('update.ejs', {student: {
+    id: req.query.id || "",
+    name: req.query.name || "",
+    spiritAnimal: req.query.animal || ""
+  }});
+  // // res.render('add.ejs');
+  // res.send('foo');
+});
+
 app.post('/save', (req,res) => {
-  console.log(req.body.name);
-  console.log(req.body.animal);
-  students.push({
-    id: students.length + 1,
-    name: req.body.name,
-    spiritAnimal: req.body.animal
-  });
+  // Update or create
+  let index = req.body.id - 1;
+  if (students[index] != undefined) {
+    students[index].name = req.body.name;
+    students[index].spiritAnimal = req.body.animal;
+  } else {
+    students.push({
+      id: students.length + 1,
+      name: req.body.name,
+      spiritAnimal: req.body.animal
+    });
+  }
   res.render('list.ejs', {students: students});
 });
 
