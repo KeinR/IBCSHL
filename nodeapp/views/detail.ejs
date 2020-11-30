@@ -4,11 +4,12 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width">
     <title>Detail</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
   </head>
   <body>
-    <a href="/">home</a> <br>
-    <a href="/update/<%=student.id%>/?name=<%=student.name%>&animal=<%=student.spiritAnimal%>">update</a> <br>
-    <a href="/delete/<%=student.id%>">PURGE</a> <br>
+    <a class="btn btn-primary" role="button" href="/">home</a> <br>
+    <a class="btn btn-primary" role="button" href="/update/<%=student.id%>/?name=<%=student.name%>&animal=<%=student.spiritAnimal%>">update</a> <br>
+    <a class="btn btn-primary" role="button" href="/delete/<%=student.id%>">PURGE</a> <br>
     ID = <%= student.id %> <br>
     name = <%= student.name %> <br>
     spirit animal = <%= student.spiritAnimal %> <br>

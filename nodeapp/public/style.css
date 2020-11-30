@@ -1,0 +1,7 @@
+#container {
+    margin: auto;
+    width: 60%;
+    text-align: center;
+    border-width: 4;
+    border-color: black;
+}

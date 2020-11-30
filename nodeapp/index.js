@@ -53,7 +53,7 @@ app.get('/list', (req,res) => {
 });
 
 app.get('/', (req,res) => {
-    res.render('index.ejs', {greeting: 'Hello world!'});
+  res.redirect('/list');
 });
 
 app.get('/add', (req,res) => {

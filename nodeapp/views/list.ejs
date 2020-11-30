@@ -4,19 +4,37 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width">
     <title>List me the things</title>
-    <link href="style.css" rel="stylesheet" type="text/css" />
+    <link href="/public/style.css" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
   </head>
   <body>
-    <a href="/">home</a> <br>
+    <a class="btn btn-primary" role="button" href="/">home</a> <br>
 
-    <% for (let id in students) { %>
-    -------------------- <br>
-    ID = <%= students[id].id %> <br>
-    name = <%= students[id].name %> <br>
-    spirit animal = <%= students[id].spiritAnimal %> <br>
-    <a href="/detail/<%= id %>">Would you like to know more?</a> <br>
-    <% } %>
-    <!-- iterate over your student array and output name and animal.  remember: logic is <%  %> and fields are <%= %>-->
+    <div id="container">
+      <table class="table">
+        <thead>
+          <tr>
+            <th colspan="2">Students</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>ID</td>
+            <td>Name</td>
+            <td>Spirit Animal</td>
+            <td>Info</td>
+          </tr>
+          <% for (let id in students) { %>
+            <tr>
+              <td><%= students[id].id %></td>
+              <td><%= students[id].name %></td>
+              <td><%= students[id].spiritAnimal %></td>
+              <td><a class="btn btn-primary" href="/detail/<%= id %>" role="button">Would you like to know more?</a></td>
+            </tr>
+          <% } %>
+        </tbody>
+      </table>
+    </div>
 
     <script src="script.js"></script>
     

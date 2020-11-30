@@ -4,9 +4,10 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width">
     <title>Update</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
   </head>
   <body>
-    <a href="/">home</a> <br>
+    <a href="/" class="btn btn-primary" role="button">home</a> <br>
 
     <form action="/save" method="POST">
         <label for="id">id:</label><br>
@@ -15,7 +16,7 @@
         <input type="text" id="name_" name="name" value="<%= student.name %>"><br>
         <label for="animal">Animal:</label><br>
         <input type="text" id="animal_" name="animal" value="<%= student.spiritAnimal %>"><br>
-        <input type="submit" value="Submit">
+        <input type="submit" value="Submit" class="btn btn-primary" role="button">
     </form> <br>
   </body>
 </html>
