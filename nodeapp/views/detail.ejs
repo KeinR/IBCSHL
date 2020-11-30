@@ -7,7 +7,8 @@
   </head>
   <body>
     <a href="/">home</a> <br>
-    <a href="/update?id=<%=student.id%>&name=<%=student.name%>&animal=<%=student.spiritAnimal%>">update</a> <br>
+    <a href="/update/<%=student.id%>/?name=<%=student.name%>&animal=<%=student.spiritAnimal%>">update</a> <br>
+    <a href="/delete/<%=student.id%>">PURGE</a> <br>
     ID = <%= student.id %> <br>
     name = <%= student.name %> <br>
     spirit animal = <%= student.spiritAnimal %> <br>

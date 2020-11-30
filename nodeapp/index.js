@@ -12,12 +12,28 @@ app.use(express.static("public"))
 app.set('view engine', ejs)
 
 //our little fake db we will use for now
-let students = [
-  {id:1, name:"Humble Galka", spiritAnimal:"shark"},
-  {id:2, name:"Lassi Sevanto", spiritAnimal:"owl"},
-  {id:3, name:"Anna Tripier", spiritAnimal:"bear"},
-  {id:4, name:"Orion Musselman", spiritAnimal:"tiger"}
-];
+let students = {};
+
+function setStudent(id, name, animal) {
+  students[id] = {
+    id: id,
+    name: name,
+    spiritAnimal: animal
+  }
+}
+
+function newStudentID() {
+  let res;
+  do {
+    res = Math.random() * Number.MAX_SAFE_INTEGER
+  } while (students[res] != undefined);
+  return res;
+}
+
+setStudent(1, "Humble Galka", "shark");
+setStudent(2, "Lassi Sevanto", "owl");
+setStudent(3, "Anna Tripier", "bear");
+setStudent(4, "Orion Musselman", "tiger");
 
 // 1
 //write a route that handles a "get" at the 
@@ -44,9 +60,9 @@ app.get('/add', (req,res) => {
   res.render('add.ejs');
 });
 
-app.get('/update', (req,res) => {
+app.get('/update/:id', (req,res) => {
   res.render('update.ejs', {student: {
-    id: req.query.id || "",
+    id: req.params.id,
     name: req.query.name || "",
     spiritAnimal: req.query.animal || ""
   }});
@@ -55,23 +71,19 @@ app.get('/update', (req,res) => {
 });
 
 app.post('/save', (req,res) => {
-  // Update or create
-  let index = req.body.id - 1;
-  if (students[index] != undefined) {
-    students[index].name = req.body.name;
-    students[index].spiritAnimal = req.body.animal;
-  } else {
-    students.push({
-      id: students.length + 1,
-      name: req.body.name,
-      spiritAnimal: req.body.animal
-    });
+  setStudent(req.body.id, req.body.name, req.body.animal);
+  res.render('list.ejs', {students: students});
+});
+
+app.get('/delete/:id', (req,res) => {
+  if (students[req.params.id] != undefined) {
+    delete students[req.params.id];
   }
   res.render('list.ejs', {students: students});
 });
 
 app.get('/detail/:id', (req,res) => {
-  res.render('detail.ejs', {student: students[req.params.id - 1]});
+  res.render('detail.ejs', {student: students[req.params.id]});
 });
 
 app.listen(3000, () => {

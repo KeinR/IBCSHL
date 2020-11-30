@@ -9,12 +9,12 @@
   <body>
     <a href="/">home</a> <br>
 
-    <% for (let i = 0; i < students.length; i++) { %>
+    <% for (let id in students) { %>
     -------------------- <br>
-    ID = <%= students[i].id %> <br>
-    name = <%= students[i].name %> <br>
-    spirit animal = <%= students[i].spiritAnimal %> <br>
-    <a href="/detail/<%= students[i].id %>">Would you like to know more?</a> <br>
+    ID = <%= students[id].id %> <br>
+    name = <%= students[id].name %> <br>
+    spirit animal = <%= students[id].spiritAnimal %> <br>
+    <a href="/detail/<%= id %>">Would you like to know more?</a> <br>
     <% } %>
     <!-- iterate over your student array and output name and animal.  remember: logic is <%  %> and fields are <%= %>-->
 
