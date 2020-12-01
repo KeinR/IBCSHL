@@ -11,8 +11,9 @@ app.use(bodyParser.json())
 app.use(express.static("public"))
 app.set('view engine', ejs)
 
-//our little fake db we will use for now
-let students = {};
+let Student = require('./models/student')
+
+students = {}
 
 function setStudent(id, name, animal) {
   students[id] = {
@@ -86,7 +87,12 @@ app.get('/detail/:id', (req,res) => {
   res.render('detail.ejs', {student: students[req.params.id]});
 });
 
+mongoose.connect("mongodb+srv://malbinson:berkeley01@cluster0.cvp0r.mongodb.net/hl_2020?retryWrites=true&w=majority", { useNewUrlParser: true, useUnifiedTopology: true }, () => {
+  console.log("db connected");
+  fef = new Student({name: "foo", username: "fewfw"});
+  fef.save();
+});
+
 app.listen(3000, () => {
   console.log('Server listening on port 3000...');
 });
-
