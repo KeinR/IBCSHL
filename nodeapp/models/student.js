@@ -5,7 +5,8 @@ let Schema = mongoose.Schema;
 let studentSchema = new Schema({
   id: Number,
   name: String,
-  animal: String
+  animal: String,
+  owner: {type: String, default: "ORIONMUSSELMAN"}
 });
 
 //attach schema to model

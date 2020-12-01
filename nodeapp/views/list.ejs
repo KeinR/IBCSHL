@@ -9,6 +9,7 @@
   </head>
   <body>
     <a class="btn btn-primary" role="button" href="/">home</a> <br>
+    <a class="btn btn-primary" role="button" href="/add">add</a>
 
     <div id="container">
       <table class="table">
@@ -24,14 +25,14 @@
             <td>Spirit Animal</td>
             <td>Info</td>
           </tr>
-          <% for (let id in students) { %>
+          <% students.map(s => { %>
             <tr>
-              <td><%= students[id].id %></td>
-              <td><%= students[id].name %></td>
-              <td><%= students[id].spiritAnimal %></td>
-              <td><a class="btn btn-primary" href="/detail/<%= id %>" role="button">Would you like to know more?</a></td>
+              <td><%= s._id %></td>
+              <td><%= s.name %></td>
+              <td><%= s.animal %></td>
+              <td><a class="btn btn-primary" href="/detail/<%= s._id %>" role="button">Would you like to know more?</a></td>
             </tr>
-          <% } %>
+          <% }); %>
         </tbody>
       </table>
     </div>

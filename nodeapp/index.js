@@ -11,30 +11,8 @@ app.use(bodyParser.json())
 app.use(express.static("public"))
 app.set('view engine', ejs)
 
-let Student = require('./models/student')
-
-students = {}
-
-function setStudent(id, name, animal) {
-  students[id] = {
-    id: id,
-    name: name,
-    spiritAnimal: animal
-  }
-}
-
-function newStudentID() {
-  let res;
-  do {
-    res = Math.random() * Number.MAX_SAFE_INTEGER
-  } while (students[res] != undefined);
-  return res;
-}
-
-setStudent(1, "Humble Galka", "shark");
-setStudent(2, "Lassi Sevanto", "owl");
-setStudent(3, "Anna Tripier", "bear");
-setStudent(4, "Orion Musselman", "tiger");
+const OWNER = "ORIONMUSSELMAN";
+let Student = require('./models/student');
 
 // 1
 //write a route that handles a "get" at the 
@@ -50,7 +28,12 @@ app.get('/read', (req,res) => {
 //"students" array to the client
 //append the list to the output div
 app.get('/list', (req,res) => {
-    res.render('list.ejs', {students: students});
+    Student.find({owner: OWNER} , (err, students) => {
+      if(err) {
+        console.err(err);
+      }
+      res.render('list.ejs', {students: students});
+    });
 });
 
 app.get('/', (req,res) => {
@@ -63,34 +46,35 @@ app.get('/add', (req,res) => {
 
 app.get('/update/:id', (req,res) => {
   res.render('update.ejs', {student: {
-    id: req.params.id,
+    _id: req.params.id,
     name: req.query.name || "",
     spiritAnimal: req.query.animal || ""
   }});
-  // // res.render('add.ejs');
-  // res.send('foo');
 });
 
-app.post('/save', (req,res) => {
-  setStudent(req.body.id, req.body.name, req.body.animal);
-  res.render('list.ejs', {students: students});
-});
-
-app.get('/delete/:id', (req,res) => {
-  if (students[req.params.id] != undefined) {
-    delete students[req.params.id];
+app.post('/save/:id', async (req,res) => {
+  let student = await Student.findById(req.params.id).exec();
+  if (student == null) {
+    student = new Student({name: "Jhon Doe", animal:"Deer"});
   }
-  res.render('list.ejs', {students: students});
+  student.name = req.body.name;
+  student.animal = req.body.animal;
+  console.log(student);
+  await student.save();
+  res.redirect('/list');
 });
 
-app.get('/detail/:id', (req,res) => {
-  res.render('detail.ejs', {student: students[req.params.id]});
+app.get('/delete/:id', async (req,res) => {
+  await Student.findByIdAndDelete(req.params.id).exec();
+  res.redirect('/list');
+});
+
+app.get('/detail/:id', async (req,res) => {
+  res.render('detail.ejs', {student: await Student.findById(req.params.id).exec()});
 });
 
 mongoose.connect("mongodb+srv://malbinson:berkeley01@cluster0.cvp0r.mongodb.net/hl_2020?retryWrites=true&w=majority", { useNewUrlParser: true, useUnifiedTopology: true }, () => {
   console.log("db connected");
-  fef = new Student({name: "foo", username: "fewfw"});
-  fef.save();
 });
 
 app.listen(3000, () => {

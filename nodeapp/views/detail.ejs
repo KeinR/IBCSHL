@@ -8,10 +8,10 @@
   </head>
   <body>
     <a class="btn btn-primary" role="button" href="/">home</a> <br>
-    <a class="btn btn-primary" role="button" href="/update/<%=student.id%>/?name=<%=student.name%>&animal=<%=student.spiritAnimal%>">update</a> <br>
-    <a class="btn btn-primary" role="button" href="/delete/<%=student.id%>">PURGE</a> <br>
-    ID = <%= student.id %> <br>
+    <a class="btn btn-primary" role="button" href="/update/<%=student._id%>/?name=<%=student.name%>&animal=<%=student.animal%>">update</a> <br>
+    <a class="btn btn-primary" role="button" href="/delete/<%=student._id%>">PURGE</a> <br>
+    ID = <%= student._id %> <br>
     name = <%= student.name %> <br>
-    spirit animal = <%= student.spiritAnimal %> <br>
+    spirit animal = <%= student.animal %> <br>
   </body>
 </html>
