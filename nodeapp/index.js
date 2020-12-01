@@ -48,18 +48,22 @@ app.get('/update/:id', (req,res) => {
   res.render('update.ejs', {student: {
     _id: req.params.id,
     name: req.query.name || "",
-    spiritAnimal: req.query.animal || ""
+    animal: req.query.animal || "",
+    birthday: req.query.birthday || new Date(),
+    image: req.query.image || ""
   }});
 });
 
-app.post('/save/:id', async (req,res) => {
-  let student = await Student.findById(req.params.id).exec();
-  if (student == null) {
-    student = new Student({name: "Jhon Doe", animal:"Deer"});
+app.post('/save/:id?', async (req,res) => {
+  if (req.params.id == undefined) {
+    student = new Student();
+  } else {
+    student = await Student.findById(req.params.id).exec();
   }
   student.name = req.body.name;
   student.animal = req.body.animal;
-  console.log(student);
+  student.birthday = req.body.birthday;
+  student.image = req.body.image;
   await student.save();
   res.redirect('/list');
 });

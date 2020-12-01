@@ -3,9 +3,10 @@ let Schema = mongoose.Schema;
 
 // create a schema
 let studentSchema = new Schema({
-  id: Number,
-  name: String,
-  animal: String,
+  name: {type: String, default: "Jhon Doe"},
+  animal: {type: String, default: "Deer"}, // Jhon Deer
+  birthday: {type: Date, default: new Date()},
+  image: {type: String, default: "https://en.touhouwiki.net/images/f/fe/Th06Rumia.png"},
   owner: {type: String, default: "ORIONMUSSELMAN"}
 });
 
